@@ -14,7 +14,7 @@ class ControladorInscripcion():
     """
     Asignacion estudiante y materia a inscripción
     """
-    def create(self, infoInscripcion,id_ciudadano,id_materia):
+    def create(self, infoInscripcion,id_ciudadano):
         nuevaInscripcion = Inscripcion(infoInscripcion)
         elCiudadano = Ciudadano(self.repositorioCiudadanos.findById(id_ciudadano))
         nuevaInscripcion.ciudadano = elCiudadano
@@ -27,7 +27,7 @@ class ControladorInscripcion():
     """
     Modificación de inscripción (ciudadano y materia)
     """
-    def update(self,id,infoInscripcion,id_ciudadano,id_materia):
+    def update(self,id,infoInscripcion,id_ciudadano):
         laInscripcion=Inscripcion(self.repositorioInscripcion.findById(id))
         laInscripcion.año=infoInscripcion["año"]
         laInscripcion.semestre = infoInscripcion["semestre"]
