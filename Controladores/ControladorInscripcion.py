@@ -1,14 +1,12 @@
 from Modelos.Inscripcion import Inscripcion
 from Modelos.Ciudadano import Ciudadano
-from Modelos.Materia import Materia
 from Repositorios.RepositorioInscripcion import RepositorioInscripcion
 from Repositorios.RepositorioCiudadano import RepositorioCiudadano
-from Repositorios.RepositorioMateria import RepositorioMateria
 class ControladorInscripcion():
     def __init__(self):
         self.repositorioInscripcion = RepositorioInscripcion()
         self.repositorioCiudadanos = RepositorioCiudadano()
-        self.repositorioMaterias = RepositorioMateria()
+
 
     def index(self):
         return self.repositorioInscripcion.findAll()
@@ -19,9 +17,7 @@ class ControladorInscripcion():
     def create(self, infoInscripcion,id_ciudadano,id_materia):
         nuevaInscripcion = Inscripcion(infoInscripcion)
         elCiudadano = Ciudadano(self.repositorioCiudadanos.findById(id_ciudadano))
-        laMateria = Materia(self.repositorioMaterias.findById(id_materia))
         nuevaInscripcion.ciudadano = elCiudadano
-        nuevaInscripcion.materia = laMateria
         return self.repositorioInscripcion.save(nuevaInscripcion)
 
     def show(self, id):
@@ -37,9 +33,7 @@ class ControladorInscripcion():
         laInscripcion.semestre = infoInscripcion["semestre"]
         laInscripcion.notaFinal=infoInscripcion["nota_final"]
         elCiudadano =Ciudadano(self.repositorioCiudadano.findById(id_ciudadano))
-        laMateria = Materia(self.repositorioMaterias.findById(id_materia))
         laInscripcion.ciudadano = elCiudadano
-        laInscripcion.materia = laMateria
         return self.repositorioInscripcion.save(laInscripcion)
 
     def delete(self, id):

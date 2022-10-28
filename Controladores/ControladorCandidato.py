@@ -20,6 +20,8 @@ class ControladorCandidato():
         candidatoActual.cedula = infoCandidato["cedula"]
         candidatoActual.nombre = infoCandidato["nombre"]
         candidatoActual.apellido = infoCandidato["apellido"]
+        candidatoActual.numero_resolucion = infoCandidato["numero_resolucion"]
+        candidatoActual.id_partido = infoCandidato["id_partido"]
         return self.repositorioCandidato.save(candidatoActual)
 
     def delete(self, id):

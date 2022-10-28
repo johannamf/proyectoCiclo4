@@ -10,15 +10,16 @@ app=Flask(__name__)
 cors = CORS(app)
 from Controladores.ControladorCiudadano import ControladorCiudadano
 from Controladores.ControladorCandidato import ControladorCandidato
-from Controladores.ControladorMateria import ControladorMateria
-from Controladores.ControladorDepartamento import ControladorDepartamento
+from Controladores.ControladorPartido import ControladorPartido
+from Controladores.ControladorMesa import ControladorMesa
 from Controladores.ControladorInscripcion import ControladorInscripcion
-
+from Controladores.ControladorMesa import ControladorMesa
 miControladorCiudadano=ControladorCiudadano()
 miControladorCandidato=ControladorCandidato()
-miControladorMateria=ControladorMateria()
-miControladorDepartamento=ControladorDepartamento()
+miControladorPartido=ControladorPartido()
+miControladorMesa=ControladorMesa()
 miControladorInscripcion=ControladorInscripcion()
+miControladorMesa=ControladorMesa()
 
 
 @app.route("/",methods=['GET'])
@@ -75,52 +76,52 @@ def eliminarCandidato(id):
     json=miControladorCandidato.delete(id)
     return jsonify(json)
 
-#  Rutas Materias
-@app.route("/materias",methods=['GET'])
-def getMaterias():
-    json=miControladorMateria.index()
+#  Rutas Partidos
+@app.route("/partidos",methods=['GET'])
+def getPartidos():
+    json=miControladorPartido.index()
     return jsonify(json)
-@app.route("/materias",methods=['POST'])
-def crearMateria():
+@app.route("/partidos",methods=['POST'])
+def crearPartido():
     data = request.get_json()
-    json=miControladorMateria.create(data)
+    json=miControladorPartido.create(data)
     return jsonify(json)
-@app.route("/materias/<string:id>",methods=['GET'])
-def getMateria(id):
-    json=miControladorMateria.show(id)
+@app.route("/partidos/<string:id>",methods=['GET'])
+def getPartido(id):
+    json=miControladorPartido.show(id)
     return jsonify(json)
-@app.route("/materias/<string:id>",methods=['PUT'])
-def modificarMateria(id):
+@app.route("/partidos/<string:id>",methods=['PUT'])
+def modificarPartido(id):
     data = request.get_json()
-    json=miControladorMateria.update(id,data)
+    json=miControladorPartido.update(id,data)
     return jsonify(json)
-@app.route("/materias/<string:id>",methods=['DELETE'])
-def eliminarMateria(id):
-    json=miControladorMateria.delete(id)
+@app.route("/partidos/<string:id>",methods=['DELETE'])
+def eliminarPartido(id):
+    json=miControladorPartido.delete(id)
     return jsonify(json)
 
-#  Rutas Departamentos
-@app.route("/departamentos",methods=['GET'])
-def getDepartamentos():
-    json=miControladorDepartamento.index()
+#  Rutas Mesas
+@app.route("/mesas",methods=['GET'])
+def getMesas():
+    json=miControladorMesa.index()
     return jsonify(json)
-@app.route("/departamentos",methods=['POST'])
-def crearDepartamento():
+@app.route("/mesas",methods=['POST'])
+def crearMesa():
     data = request.get_json()
-    json=miControladorDepartamento.create(data)
+    json=miControladorMesa.create(data)
     return jsonify(json)
-@app.route("/departamentos/<string:id>",methods=['GET'])
-def getDepartamento(id):
-    json=miControladorDepartamento.show(id)
+@app.route("/mesas/<string:id>",methods=['GET'])
+def getMesa(id):
+    json=miControladorMesa.show(id)
     return jsonify(json)
-@app.route("/departamentos/<string:id>",methods=['PUT'])
-def modificarDepartamento(id):
+@app.route("/mesas/<string:id>",methods=['PUT'])
+def modificarMesa(id):
     data = request.get_json()
-    json=miControladorDepartamento.update(id,data)
+    json=miControladorMesa.update(id,data)
     return jsonify(json)
-@app.route("/departamentos/<string:id>",methods=['DELETE'])
-def eliminarDepartamento(id):
-    json=miControladorDepartamento.delete(id)
+@app.route("/mesas/<string:id>",methods=['DELETE'])
+def eliminarMesa(id):
+    json=miControladorMesa.delete(id)
     return jsonify(json)
 
 #  Rutas Inscripcion
@@ -133,16 +134,16 @@ def getInscripcion(id):
     json=miControladorInscripcion.show(id)
     return jsonify(json)
 
-@app.route("/inscripciones/ciudadano/<string:id_ciudadano>/materia/<string:id_materia>",methods=['POST'])
-def crearInscripcion(id_ciudadano,id_materia):
+@app.route("/inscripciones/ciudadano/<string:id_ciudadano>/partido/<string:id_partido>",methods=['POST'])
+def crearInscripcion(id_ciudadano,id_partido):
     data = request.get_json()
-    json=miControladorInscripcion.create(data,id_ciudadano,id_materia)
+    json=miControladorInscripcion.create(data,id_ciudadano,id_partido)
     return jsonify(json)
 
-@app.route("/inscripciones/<string:id_inscripcion>/ciudadano/<string:id_ciudadano>/materia/<string:id_materia>",methods=['PUT'])
-def modificarInscripcion(id_inscripcion,id_ciudadano,id_materia):
+@app.route("/inscripciones/<string:id_inscripcion>/ciudadano/<string:id_ciudadano>/partido/<string:id_partido>",methods=['PUT'])
+def modificarInscripcion(id_inscripcion,id_ciudadano,id_partido):
     data = request.get_json()
-    json=miControladorInscripcion.update(id_inscripcion,data,id_ciudadano,id_materia)
+    json=miControladorInscripcion.update(id_inscripcion,data,id_ciudadano,id_partido)
     return jsonify(json)
 
 @app.route("/inscripciones/<string:id_inscripcion>",methods=['DELETE'])
@@ -151,9 +152,9 @@ def eliminarInscripcion(id_inscripcion):
     return jsonify(json)
 
 # Otras Rutas
-@app.route("/materias/<string:id>/departamento/<string:id_departamento>",methods=['PUT'])
-def asignarDepartamentoAMateria(id,id_departamento):
-    json=miControladorMateria.asignarDepartamento(id,id_departamento)
+@app.route("/partidos/<string:id>/mesa/<string:id_mesa>",methods=['PUT'])
+def asignarMesaAPartido(id,id_mesa):
+    json=miControladorPartido.asignarMesa(id,id_mesa)
     return jsonify(json)
 
 
