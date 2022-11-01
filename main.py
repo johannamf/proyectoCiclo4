@@ -11,9 +11,9 @@ cors = CORS(app)
 from Controladores.ControladorCiudadano import ControladorCiudadano
 from Controladores.ControladorCandidato import ControladorCandidato
 from Controladores.ControladorPartido import ControladorPartido
-from Controladores.ControladorMesa import ControladorMesa
 from Controladores.ControladorInscripcion import ControladorInscripcion
 from Controladores.ControladorMesa import ControladorMesa
+
 miControladorCiudadano=ControladorCiudadano()
 miControladorCandidato=ControladorCandidato()
 miControladorPartido=ControladorPartido()
