@@ -2,8 +2,7 @@ from Repositorios.RepositorioMesa import RepositorioMesa
 from Modelos.Mesa import Mesa
 from Repositorios.RepositorioCandidato import RepositorioCandidato
 from Modelos.Candidato import Candidato
-from Repositorios.RepositorioPartido import RepositorioPartido
-from Modelos.Partido import Partido
+
 class ControladorMesa():
     def __init__(self):
         self.repositorioMesa = RepositorioMesa()
@@ -29,7 +28,7 @@ class ControladorMesa():
         mesaActual.cantidad_inscritos = infoMesa["cantidad_inscritos"]
         mesaActual.total_votos = infoMesa["total_votos"]
         id_candidato = infoMesa["id_candidato_ganador"]
-        elCandidato = Candidato(self.repositorioCiudadanos.findById(id_candidato))
+        elCandidato = Candidato(self.repositorioCandidato.findById(id_candidato))
         mesaActual.id_candidato_ganador = elCandidato
         mesaActual.cant_votos_ganador = infoMesa["cant_votos_inscritos"]
 
