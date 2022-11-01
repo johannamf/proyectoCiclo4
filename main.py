@@ -156,7 +156,9 @@ def eliminarInscripcion(id_inscripcion):
 def asignarMesaAPartido(id,id_mesa):
     json=miControladorPartido.asignarMesa(id,id_mesa)
     return jsonify(json)
-
+@app.route("/resultado",methods=['GET'])
+def mostrarResultado():
+    return "El resultado ira aqui pronto!"
 
 # Funciones globales
 def loadFileConfig():
