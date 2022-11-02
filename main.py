@@ -1,4 +1,3 @@
-
 from flask import Flask
 from flask import jsonify
 from flask import request
@@ -11,14 +10,12 @@ cors = CORS(app)
 from Controladores.ControladorCiudadano import ControladorCiudadano
 from Controladores.ControladorCandidato import ControladorCandidato
 from Controladores.ControladorPartido import ControladorPartido
-from Controladores.ControladorInscripcion import ControladorInscripcion
 from Controladores.ControladorMesa import ControladorMesa
 
 miControladorCiudadano=ControladorCiudadano()
 miControladorCandidato=ControladorCandidato()
 miControladorPartido=ControladorPartido()
 miControladorMesa=ControladorMesa()
-miControladorInscripcion=ControladorInscripcion()
 miControladorMesa=ControladorMesa()
 
 
@@ -122,33 +119,6 @@ def modificarMesa(id):
 @app.route("/mesas/<string:id>",methods=['DELETE'])
 def eliminarMesa(id):
     json=miControladorMesa.delete(id)
-    return jsonify(json)
-
-#  Rutas Inscripcion
-@app.route("/inscripciones",methods=['GET'])
-def getInscripciones():
-    json=miControladorInscripcion.index()
-    return jsonify(json)
-@app.route("/inscripciones/<string:id>",methods=['GET'])
-def getInscripcion(id):
-    json=miControladorInscripcion.show(id)
-    return jsonify(json)
-
-@app.route("/inscripciones/ciudadano/<string:id_ciudadano>/partido/<string:id_partido>",methods=['POST'])
-def crearInscripcion(id_ciudadano,id_partido):
-    data = request.get_json()
-    json=miControladorInscripcion.create(data,id_ciudadano,id_partido)
-    return jsonify(json)
-
-@app.route("/inscripciones/<string:id_inscripcion>/ciudadano/<string:id_ciudadano>/partido/<string:id_partido>",methods=['PUT'])
-def modificarInscripcion(id_inscripcion,id_ciudadano,id_partido):
-    data = request.get_json()
-    json=miControladorInscripcion.update(id_inscripcion,data,id_ciudadano,id_partido)
-    return jsonify(json)
-
-@app.route("/inscripciones/<string:id_inscripcion>",methods=['DELETE'])
-def eliminarInscripcion(id_inscripcion):
-    json=miControladorInscripcion.delete(id_inscripcion)
     return jsonify(json)
 
 # Otras Rutas
