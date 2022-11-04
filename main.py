@@ -16,16 +16,13 @@ miControladorCiudadano=ControladorCiudadano()
 miControladorCandidato=ControladorCandidato()
 miControladorPartido=ControladorPartido()
 miControladorMesa=ControladorMesa()
-miControladorMesa=ControladorMesa()
-
 
 @app.route("/",methods=['GET'])
 def test():
     json = {}
     json["message"]="Hola Mundo, Server Running ..."
     return jsonify(json)
-
-#  Rutas Ciudadanos
+# Rutas Ciudadanos
 @app.route("/ciudadanos",methods=['GET'])
 def getCiudadanos():
     json=miControladorCiudadano.index()
@@ -43,10 +40,6 @@ def getCiudadano(id):
 def modificarCiudadano(id):
     data = request.get_json()
     json=miControladorCiudadano.update(id,data)
-    return jsonify(json)
-@app.route("/ciudadanos/<string:id>",methods=['DELETE'])
-def eliminarCiudadano(id):
-    json=miControladorCiudadano.delete(id)
     return jsonify(json)
 
 # Rutas Candidatos
